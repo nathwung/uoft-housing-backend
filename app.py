@@ -26,7 +26,7 @@ app.register_blueprint(auth_bp, url_prefix='/api')
 app.register_blueprint(listings_bp)
 
 # PostgreSQL DB config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:nath1234@localhost:5432/uoft_housing'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
