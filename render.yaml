@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: uoft-housing-backend
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: JWT_SECRET
+        value: your-secret-key
+      - key: DATABASE_URL
+        value: your Postgres URL from Render
+    plan: free
