@@ -62,7 +62,7 @@ def verify_email():
         }, os.getenv('JWT_SECRET', 'your-secret-key'), algorithm='HS256')
 
         redirect_url = (
-            f"http://localhost:3000/verified?"
+            f"https://uoft-housing.vercel.app/verified?"
             f"token={jwt_token}&"
             f"name={user.name}&"
             f"email={user.email}&"
@@ -122,7 +122,7 @@ def register():
 
     # Generate verification token + send email like before
     token = generate_confirmation_token(email)
-    confirm_url = f"http://localhost:5000/api/verify?token={token}"
+    confirm_url = f"https://uoft-housing-backend.onrender.com/api/verify?token={token}"
     send_verification_email(email, data['name'], confirm_url)
 
     return jsonify({'message': 'Verification email sent. Please check your inbox to activate your account.'})
