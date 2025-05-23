@@ -15,7 +15,15 @@ from models.user import User
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, resources={r"/api/*": {"origins": ["http://localhost:3000", "http://localhost:3002"]}})
+CORS(app, supports_credentials=True, resources={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:3000",
+            "http://localhost:3002",
+            "https://uoft-housing.vercel.app"
+        ]
+    }
+})
 
 # Use a secure secret key (load from .env in real app)
 app.config['SECRET_KEY'] = os.getenv('JWT_SECRET', 'your-secret-key')
