@@ -23,7 +23,7 @@ def post_message(listing_id):
     data = request.json
     print('Incoming message payload:', data)
 
-    if not data or 'text' not in data or 'sender_name' not in data:
+    if not data or 'text' not in data or 'sender_name' not in data or 'recipient_name' not in data:
         return jsonify({'error': 'Invalid message data'}), 400
 
     try:
