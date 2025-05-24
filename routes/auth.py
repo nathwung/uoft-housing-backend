@@ -265,28 +265,3 @@ def reset_password(token):
         db.session.commit()
         return jsonify({'message': 'Password updated'})
     return jsonify({'error': 'User not found'}), 404
-
-@auth_bp.route('/add-test-user', methods=['POST'])
-def add_test_user():
-    from werkzeug.security import generate_password_hash
-    from models.user import User
-    from models import db
-
-    email = "john@mail.utoronto.ca"
-
-    if User.query.filter_by(email=email).first():
-        return jsonify({"message": "Test user already exists"}), 200
-
-    test_user = User(
-        name="John Doe",
-        email=email,
-        password=generate_password_hash("password123"),
-        program="Computer Science",
-        year="2026",
-        verified=True
-    )
-
-    db.session.add(test_user)
-    db.session.commit()
-
-    return jsonify({"message": "Test user created successfully"}), 201
