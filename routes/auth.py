@@ -223,7 +223,7 @@ def forgot_password():
         return jsonify({'error': 'No user with that email'}), 404
 
     token = generate_confirmation_token(email)
-    reset_link = f"http://localhost:3000/reset-password?token={token}"
+    reset_link = f"https://uoft-housing.vercel.app/reset-password?token={token}"
 
     message = Mail(
         from_email='uofthousing@outlook.com',
