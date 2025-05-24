@@ -166,7 +166,11 @@ def login():
     })
 
 @auth_bp.route('/update-profile', methods=['POST'])
-@cross_origin(origins=["http://localhost:3000", "http://localhost:3002"])
+@cross_origin(origins=[
+    "http://localhost:3000",
+    "http://localhost:3002",
+    "https://uoft-housing.vercel.app"
+])
 def update_profile():
     data = request.get_json()
     email = data.get('email')
