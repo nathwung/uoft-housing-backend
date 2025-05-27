@@ -20,6 +20,9 @@ def get_listing(listing_id):
 @listings_bp.route('/api/listings', methods=['POST'])
 def create_listing():
     data = request.get_json()
+
+    poster = data.get('poster', {})  # Use .get() to avoid KeyError
+
     listing = Listing(
         id=str(uuid.uuid4()),
         title=data.get('title'),
@@ -36,14 +39,15 @@ def create_listing():
         startDate=data.get('startDate'),
         endDate=data.get('endDate'),
         roommatePreference=data.get('roommatePreference'),
-        lat=data.get('lat'), 
-        lng=data.get('lng'),  
-        poster_name=data['poster']['name'],
-        poster_email=data['poster']['email'],
-        poster_program=data['poster']['program'],
-        poster_year=data['poster']['year'],
-        poster_avatar=data['poster']['avatar']
+        lat=data.get('lat'),
+        lng=data.get('lng'),
+        poster_name=poster.get('name'),
+        poster_email=poster.get('email'),
+        poster_program=poster.get('program'),
+        poster_year=poster.get('year'),
+        poster_avatar=poster.get('avatar')
     )
+
     db.session.add(listing)
     db.session.commit()
     return jsonify(listing.to_dict()), 201
